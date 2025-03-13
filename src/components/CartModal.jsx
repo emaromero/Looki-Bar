@@ -1,0 +1,224 @@
+// src/components/CartModal.jsx
+import React, { useState, useEffect } from 'react';
+import * as bootstrap from 'bootstrap';
+
+function CartModal({ cart, setCart, onClose }) {
+    const [delivery, setDelivery] = useState(false);
+    const [takeaway, setTakeaway] = useState(false);
+    const [name, setName] = useState("");
+    const [paymentMethod, setPaymentMethod] = useState("efectivo");
+    const [cashAmount, setCashAmount] = useState("");
+    const [deliveryAddress, setDeliveryAddress] = useState("");
+    const [betweenStreets, setBetweenStreets] = useState("");
+    const [locality, setLocality] = useState("");
+    const [orderComment, setOrderComment] = useState("");
+    const [coupon, setCoupon] = useState("");
+
+    useEffect(() => {
+        const modal = new bootstrap.Modal(document.getElementById('carrito'), { keyboard: false });
+        modal.show();
+        document.getElementById('nombre')?.focus();
+        return () => modal.hide();
+    }, []);
+
+    useEffect(() => {
+        const adjustCartPosition = () => {
+            const footer = document.querySelector("footer");
+            const cartElement = document.querySelector(".fixed-cart");
+            if (!footer || !cartElement) return;
+            const footerHeight = footer.offsetHeight;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll + windowHeight >= documentHeight - footerHeight) {
+                footer.classList.add("fixed");
+                cartElement.style.transform = `translateY(-${footerHeight}px)`;
+            } else {
+                footer.classList.remove("fixed");
+                cartElement.style.transform = "translateY(0)";
+            }
+        };
+
+        window.addEventListener("scroll", adjustCartPosition);
+        window.addEventListener("resize", adjustCartPosition);
+        adjustCartPosition();
+
+        return () => {
+            window.removeEventListener("scroll", adjustCartPosition);
+            window.removeEventListener("resize", adjustCartPosition);
+        };
+    }, []);
+
+    const handleDelivery = () => {
+        setDelivery(true);
+        setTakeaway(false);
+    };
+
+    const handleTakeaway = () => {
+        setTakeaway(true);
+        setDelivery(false);
+    };
+
+    const removeItem = (index) => {
+        const newCart = cart.filter((_, i) => i !== index);
+        setCart(newCart);
+    };
+
+    const sendOrder = () => {
+        if (cart.length === 0) {
+            alert("El carrito está vacío. Agrega productos antes de enviar el pedido.");
+            return;
+        }
+        if (!name || (!delivery && !takeaway)) {
+            alert("Por favor, completa los campos obligatorios: Nombre y elige Delivery o Takeaway.");
+            return;
+        }
+        if (delivery && (!deliveryAddress || !locality)) {
+            alert("Para Delivery, completa Domicilio y Localidad.");
+            return;
+        }
+
+        let mensaje = "*Hola! Quiero hacer un pedido:*\n\n";
+        cart.forEach(prod => {
+            mensaje += `${prod.cantidad}x ${prod.Nombre} - $${Math.round(parseFloat(prod.Precio) * prod.cantidad)} ${prod.comentario ? `(${prod.comentario})` : ""}\n`;
+        });
+        const total = cart.reduce((sum, p) => sum + parseFloat(p.Precio) * p.cantidad, 0);
+        mensaje += `\n*Total:* $${Math.round(total)}\n\n`;
+        mensaje += `*Nombre:* ${name}\n`;
+
+        if (delivery) {
+            mensaje += `*Domicilio:* ${deliveryAddress}\n`;
+            if (betweenStreets) mensaje += `Entre calles: ${betweenStreets}\n`;
+            mensaje += `*Localidad:* ${locality}\n`;
+        } else if (takeaway) {
+            mensaje += "*Retiro:* Av Caamaño 844, Pilar\n";
+        }
+
+        mensaje += `*Forma de pago:* ${paymentMethod}`;
+        if (paymentMethod === "efectivo" && cashAmount) mensaje += ` (Con: ${cashAmount})`;
+        mensaje += "\n";
+        if (orderComment) mensaje += `Comentario: ${orderComment}\n`;
+        if (coupon) mensaje += `Cupón: ${coupon}\n`;
+
+        window.open(`https://wa.me/5491140445556?text=${encodeURIComponent(mensaje)}`);
+        onClose();
+    };
+
+    return (
+        <div className="modal fade" id="carrito" tabIndex="-1" aria-labelledby="carritoLabel" aria-hidden="true">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="carritoLabel">Carrito</h5>
+                        <button type="button" className="btn-close" onClick={onClose} aria-label="Cerrar"></button>
+                    </div>
+                    <div className="modal-body">
+                        <ul className="list-unstyled">
+                            {cart.map((producto, index) => (
+                                <li key={index} className="d-flex justify-content-between align-items-center mb-2">
+                                    {`${producto.cantidad}x ${producto.Nombre} - $${Math.round(parseFloat(producto.Precio) * producto.cantidad)} ${producto.comentario ? `(${producto.comentario})` : ""}`}
+                                    <button className="btn btn-danger ms-2" onClick={() => removeItem(index)}>X</button>
+                                </li>
+                            ))}
+                        </ul>
+                        <hr />
+                        <strong>Total: <span>${Math.round(cart.reduce((sum, p) => sum + parseFloat(p.Precio) * p.cantidad, 0))}</span></strong>
+                        <form onSubmit={(e) => e.preventDefault()}>
+                            <input
+                                id="nombre"
+                                type="text"
+                                className="form-control mt-2"
+                                placeholder="Nombre y Apellido*"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
+                            {name && (
+                                <div className="mt-3">
+                                    <button type="button" className={`btn btn-primary me-2 ${delivery ? 'btn-active' : ''}`} onClick={handleDelivery}>Delivery</button>
+                                    <button type="button" className={`btn btn-secondary ${takeaway ? 'btn-active' : ''}`} onClick={handleTakeaway}>Takeaway</button>
+                                </div>
+                            )}
+                            {delivery && (
+                                <div className="mt-2">
+                                    <input
+                                        type="text"
+                                        className="form-control mt-2"
+                                        placeholder="Domicilio*"
+                                        value={deliveryAddress}
+                                        onChange={(e) => setDeliveryAddress(e.target.value)}
+                                        required
+                                    />
+                                    <input
+                                        type="text"
+                                        className="form-control mt-2"
+                                        placeholder="Entre calles"
+                                        value={betweenStreets}
+                                        onChange={(e) => setBetweenStreets(e.target.value)}
+                                    />
+                                    <input
+                                        type="text"
+                                        className="form-control mt-2"
+                                        placeholder="Localidad*"
+                                        value={locality}
+                                        onChange={(e) => setLocality(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            )}
+                            {takeaway && (
+                                <div className="mt-2">
+                                    <p className="text-muted">Te esperamos para retirar en Av Caamaño 844, Pilar.</p>
+                                    <iframe
+                                        className="mini-mapa"
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3292.708605698858!2d-58.846448!3d-34.4149642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bc9dc154eca599%3A0x2270a90209fea6f8!2sR.%20Caama%C3%B1o%20844%2C%20B1631%20Villa%20Rosa%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1698259200000!5m2!1ses!2sar"
+                                        allowFullScreen=""
+                                        loading="lazy"
+                                    ></iframe>
+                                </div>
+                            )}
+                            <label className="mt-2">Forma de pago*</label>
+                            <select
+                                className="form-control mt-1"
+                                value={paymentMethod}
+                                onChange={(e) => setPaymentMethod(e.target.value)}
+                            >
+                                <option value="efectivo">Efectivo</option>
+                                <option value="transferencia">Transferencia</option>
+                            </select>
+                            {paymentMethod === "efectivo" && (
+                                <input
+                                    type="text"
+                                    className="form-control mt-2"
+                                    placeholder="¿Con cuánto?"
+                                    value={cashAmount}
+                                    onChange={(e) => setCashAmount(e.target.value)}
+                                />
+                            )}
+                            <input
+                                type="text"
+                                className="form-control mt-2"
+                                placeholder="Comentario opcional"
+                                value={orderComment}
+                                onChange={(e) => setOrderComment(e.target.value)}
+                            />
+                            <input
+                                type="text"
+                                className="form-control mt-2"
+                                placeholder="¿Tenés algún cupón?"
+                                value={coupon}
+                                onChange={(e) => setCoupon(e.target.value)}
+                            />
+                        </form>
+                        <div className="modal-footer">
+                            <button className="btn btn-success" onClick={sendOrder}>Enviar pedido por WhatsApp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default CartModal;
