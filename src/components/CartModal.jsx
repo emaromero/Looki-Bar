@@ -1,8 +1,7 @@
-// src/components/CartModal.jsx
 import React, { useState, useEffect } from 'react';
 import * as bootstrap from 'bootstrap';
 
-function CartModal({ cart, setCart, onClose }) {
+function CartModal({ cart, setCart, onClose, showConfirmationAlert }) {
     const [delivery, setDelivery] = useState(false);
     const [takeaway, setTakeaway] = useState(false);
     const [name, setName] = useState("");
@@ -18,7 +17,12 @@ function CartModal({ cart, setCart, onClose }) {
         const modal = new bootstrap.Modal(document.getElementById('carrito'), { keyboard: false });
         modal.show();
         document.getElementById('nombre')?.focus();
-        return () => modal.hide();
+        return () => {
+            modal.hide();
+            document.body.classList.remove('modal-open');
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) backdrop.remove();
+        };
     }, []);
 
     useEffect(() => {
@@ -26,24 +30,25 @@ function CartModal({ cart, setCart, onClose }) {
             const footer = document.querySelector("footer");
             const cartElement = document.querySelector(".fixed-cart");
             if (!footer || !cartElement) return;
+    
             const footerHeight = footer.offsetHeight;
+            const cartHeight = cartElement.offsetHeight;
             const windowHeight = window.innerHeight;
+            const scrollPosition = window.pageYOffset;
             const documentHeight = document.documentElement.scrollHeight;
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll + windowHeight >= documentHeight - footerHeight) {
-                footer.classList.add("fixed");
-                cartElement.style.transform = `translateY(-${footerHeight}px)`;
+    
+            // Si estamos cerca del footer, ajustar el carrito para que no se superponga
+            if (scrollPosition + windowHeight > documentHeight - footerHeight) {
+                cartElement.style.bottom = `${footerHeight + 5}px`; // 5px de margen adicional
             } else {
-                footer.classList.remove("fixed");
-                cartElement.style.transform = "translateY(0)";
+                cartElement.style.bottom = "85px"; // Valor por defecto
             }
         };
-
+    
         window.addEventListener("scroll", adjustCartPosition);
         window.addEventListener("resize", adjustCartPosition);
         adjustCartPosition();
-
+    
         return () => {
             window.removeEventListener("scroll", adjustCartPosition);
             window.removeEventListener("resize", adjustCartPosition);
@@ -67,15 +72,24 @@ function CartModal({ cart, setCart, onClose }) {
 
     const sendOrder = () => {
         if (cart.length === 0) {
-            alert("El carrito está vacío. Agrega productos antes de enviar el pedido.");
+            showConfirmationAlert(`
+                <span style="color: red; font-size: 1.5rem;">⚠️</span><br>
+                El carrito está vacío. Agrega productos antes de enviar el pedido.
+            `);
             return;
         }
         if (!name || (!delivery && !takeaway)) {
-            alert("Por favor, completa los campos obligatorios: Nombre y elige Delivery o Takeaway.");
+            showConfirmationAlert(`
+                <span style="color: red; font-size: 1.5rem;">⚠️</span><br>
+                Por favor, completa los campos obligatorios: Nombre y elige Delivery o Takeaway.
+            `);
             return;
         }
         if (delivery && (!deliveryAddress || !locality)) {
-            alert("Para Delivery, completa Domicilio y Localidad.");
+            showConfirmationAlert(`
+                <span style="color: red; font-size: 1.5rem;">⚠️</span><br>
+                Para Delivery, completa Domicilio y Localidad.
+            `);
             return;
         }
 
@@ -101,8 +115,18 @@ function CartModal({ cart, setCart, onClose }) {
         if (orderComment) mensaje += `Comentario: ${orderComment}\n`;
         if (coupon) mensaje += `Cupón: ${coupon}\n`;
 
-        window.open(`https://wa.me/5491140445556?text=${encodeURIComponent(mensaje)}`);
-        onClose();
+        showConfirmationAlert(`
+            <span style="color: green; font-size: 2rem;">✅</span><br>
+            ¡Tu pedido ha sido enviado con éxito!
+        `);
+
+        const cartModal = bootstrap.Modal.getInstance(document.getElementById('carrito'));
+        cartModal.hide();
+
+        setTimeout(() => {
+            window.open(`https://wa.me/5491140445556?text=${encodeURIComponent(mensaje)}`);
+            onClose();
+        }, 1000);
     };
 
     return (
@@ -111,7 +135,16 @@ function CartModal({ cart, setCart, onClose }) {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="carritoLabel">Carrito</h5>
-                        <button type="button" className="btn-close" onClick={onClose} aria-label="Cerrar"></button>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            onClick={() => {
+                                onClose();
+                                const modal = bootstrap.Modal.getInstance(document.getElementById('carrito'));
+                                modal.hide();
+                            }}
+                            aria-label="Cerrar"
+                        ></button>
                     </div>
                     <div className="modal-body">
                         <ul className="list-unstyled">

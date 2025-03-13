@@ -1,4 +1,3 @@
-// src/components/ProductModal.jsx
 import React, { useEffect } from 'react';
 import * as bootstrap from 'bootstrap';
 
@@ -7,7 +6,12 @@ function ProductModal({ currentProduct, onClose, onProceed }) {
         if (currentProduct) {
             const modal = new bootstrap.Modal(document.getElementById('popup'), { keyboard: false });
             modal.show();
-            return () => modal.hide();
+            return () => {
+                modal.hide(); // Cierra el modal
+                document.body.classList.remove('modal-open'); // Elimina clase que bloquea el scroll
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) backdrop.remove(); // Elimina el backdrop manualmente
+            };
         }
     }, [currentProduct]);
 
@@ -19,7 +23,19 @@ function ProductModal({ currentProduct, onClose, onProceed }) {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="popupLabel">{currentProduct.Nombre}</h5>
-                        <button type="button" className="btn-close" onClick={onClose} aria-label="Cerrar"></button>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            onClick={() => {
+                                onClose();
+                                const modal = bootstrap.Modal.getInstance(document.getElementById('popup'));
+                                modal.hide();
+                                document.body.classList.remove('modal-open');
+                                const backdrop = document.querySelector('.modal-backdrop');
+                                if (backdrop) backdrop.remove();
+                            }}
+                            aria-label="Cerrar"
+                        ></button>
                     </div>
                     <div className="modal-body text-center">
                         <img
@@ -30,7 +46,19 @@ function ProductModal({ currentProduct, onClose, onProceed }) {
                         <p>{currentProduct.Descripción}</p>
                         <div className="price-button-container">
                             <strong>${Math.round(parseFloat(currentProduct.Precio || 0))}</strong>
-                            <button className="btn btn-primary" onClick={onProceed}>Agregar</button>
+                            <button
+                                className="btn btn-primary"
+                                onClick={() => {
+                                    onProceed();
+                                    const modal = bootstrap.Modal.getInstance(document.getElementById('popup'));
+                                    modal.hide();
+                                    document.body.classList.remove('modal-open');
+                                    const backdrop = document.querySelector('.modal-backdrop');
+                                    if (backdrop) backdrop.remove();
+                                }}
+                            >
+                                Agregar
+                            </button>
                         </div>
                     </div>
                 </div>

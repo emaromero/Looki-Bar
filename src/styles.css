@@ -5,141 +5,141 @@
 /* Cargar la fuente personalizada 'Baron Neue' */
 @font-face {
     font-family: 'Baron Neue';
-    src: url('../public/fonts/Baron\ Neue.otf') format('opentype');
+    src: url('../public/fonts/Baron Neue.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 /* Estilos generales para el cuerpo de la página */
 body {
-    background-color: #000000; /* Fondo negro para un diseño oscuro y elegante */
+    background-color: #000000;
     margin: 0;
     padding: 0;
-    font-family: 'Baron Neue', sans-serif; /* Fuente personalizada para todo el sitio */
-    color: #000101; /* Color de texto principal, casi negro */
+    font-family: 'Baron Neue', sans-serif;
+    color: #000101;
 }
 
 /* Estilos para encabezados (h1, h2, h5) */
 h1, h2, h5 {
-    font-family: 'Baron Neue', sans-serif; /* Mantiene la fuente personalizada */
-    color: #094229; /* Verde oscuro para títulos, coherente con el branding */
+    font-family: 'Baron Neue', sans-serif;
+    color: #094229;
 }
 
 h1 {
-    font-size: 2.5rem; /* Tamaño grande para títulos principales */
-    margin-bottom: 2rem; /* Espacio inferior para separación */
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
 }
 
 h5 {
-    font-size: 1.25rem; /* Tamaño mediano para subtítulos o títulos de secciones */
+    font-size: 1.25rem;
 }
 
 /* Título del modal en blanco para contraste con el fondo oscuro */
 .modal-header h5 {
-    color: #ffffff; /* Texto blanco para mejorar la legibilidad en el modal */
+    color: #ffffff;
 }
 
 /* Estilos para textos mutados y botones del acordeón */
 .text-muted, .accordion-button {
-    font-family: 'Baron Neue', sans-serif; /* Fuente consistente */
-    color: #0B361B; /* Verde oscuro para textos secundarios o botones */
+    font-family: 'Baron Neue', sans-serif;
+    color: #0B361B;
 }
 
 /* Estilos para el header (encabezado superior) */
 header {
-    background-image: url('../public/images/fondo-header1.jpg'); /* Imagen de fondo para el header */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
-    background-size: auto; /* Mantiene las proporciones originales de la imagen */
-    background-position: center; /* Centra la imagen horizontal y verticalmente */
-    padding: 15px 0; /* Espaciado vertical */
-    text-align: center; /* Centra el texto */
-    top: 0; /* Fija el header en la parte superior */
-    width: 100%; /* Ocupa todo el ancho */
-    z-index: 1000; /* Asegura que esté sobre otros elementos */
-    box-shadow: 0 2px 5px rgba(0, 1, 1, 0.1); /* Sombra ligera para profundidad */
+    background-image: url('../public/images/fondo-header1.jpg');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+    padding: 15px 0;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 1, 1, 0.1);
 }
 
 .header-content {
-    display: flex; /* Usa flexbox para alinear elementos */
-    flex-direction: column; /* Apila los elementos verticalmente */
-    align-items: center; /* Centra los elementos horizontalmente */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header img.logo {
-    max-width: 100px; /* Limita el tamaño del logo */
-    margin-bottom: 10px; /* Espacio debajo del logo */
+    max-width: 100px;
+    margin-bottom: 10px;
 }
 
 header h1 {
-    font-size: 1.8rem; /* Tamaño del título en el header */
-    margin: 0; /* Quita márgenes predeterminados */
-    margin-bottom: 10px; /* Espacio inferior */
+    font-size: 1.8rem;
+    margin: 0;
+    margin-bottom: 10px;
 }
 
 header p {
-    font-family: 'Baron Neue', sans-serif; /* Fuente consistente */
-    color: #ffffff; /* Texto blanco para contraste con el fondo oscuro */
-    margin: 0; /* Quita márgenes predeterminados */
-    font-size: 1rem; /* Tamaño de fuente legible */
+    font-family: 'Baron Neue', sans-serif;
+    color: #ffffff;
+    margin: 0;
+    font-size: 1rem;
 }
 
 header p i {
-    margin-right: 5px; /* Espacio a la derecha del ícono de reloj */
+    margin-right: 5px;
 }
 
 /* Contenedor principal */
 .container {
     padding: 20px;
-    margin-top: 150px; /* Ajustado para header fijo */
-    margin-bottom: 80px; /* Espacio para carrito */
+    margin-top: 150px;
+    margin-bottom: 80px;
 }
 
 /* Estilos para el contenedor de categorías (Accordion) */
 #categorias-container {
-    margin-bottom: 80px; /* Espacio inferior para separación con otros elementos */
+    margin-bottom: 80px;
 }
 
 /* Estilos para cada item del acordeón */
 .accordion-item {
-    border: none; /* Sin borde para un diseño limpio */
-    background-color: #1a1a1a; /* Fondo oscuro para consistencia visual */
-    margin-bottom: 10px; /* Espacio entre ítems */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para profundidad */
+    border: none;
+    background-color: #1a1a1a;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Estilos para los botones del acordeón */
 .accordion-button {
-    background-image: url('../public/images/fondo-acordeon.png'); /* Imagen de fondo para el botón */
-    background-size: cover; /* Ajusta la imagen para cubrir el botón */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita repetición de la imagen */
-    color: #000000; /* Texto negro para contraste con la imagen */
-    font-size: 1.2rem; /* Tamaño de fuente legible */
-    font-family: 'Baron Neue', sans-serif; /* Fuente personalizada */
-    border: none; /* Sin borde para un diseño limpio */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra sutil para efecto 3D */
-    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transición suave para interacciones */
+    background-image: url('../public/images/fondo-acordeon.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #000000;
+    font-size: 1.2rem;
+    font-family: 'Baron Neue', sans-serif;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .accordion-button:hover {
-    transform: translateY(-2px); /* Efecto de elevación al pasar el cursor */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada al hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Estilos para el botón cuando está expandido */
 .accordion-button:not(.collapsed) {
-    background-image: url('../public/images/fondo-acordeon.png'); /* Mantiene la misma imagen */
+    background-image: url('../public/images/fondo-acordeon.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    color: #000000; /* Texto negro para consistencia */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa al abrir */
+    color: #000000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Estilos para el foco del botón */
 .accordion-button:focus {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Resplandor oscuro al enfocar */
-    outline: none; /* Quita el outline predeterminado */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    outline: none;
 }
 
 /* Estilos para la flecha del acordeón (usando SVG) */
@@ -154,384 +154,452 @@ header p i {
 
 /* Estilos para el cuerpo del acordeón */
 .accordion-body {
-    background-color: #1a1a1a; /* Fondo oscuro para consistencia */
-    padding: 15px; /* Espaciado interno */
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra interna para profundidad */
+    background-color: #1a1a1a;
+    padding: 15px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilos para los productos dentro del acordeón */
 .producto {
-    cursor: pointer; /* Cambia el cursor para indicar interactividad */
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación suave para hover */
-    background-color: #ffffff; /* Fondo blanco para los productos */
-    border: 1px solid #9BA45E; /* Borde verde claro para contraste */
-    border-radius: 10px; /* Bordes redondeados */
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #ffffff;
+    border: 1px solid #9BA45E;
+    border-radius: 10px;
 }
 
 .producto:hover {
-    transform: translateY(-5px); /* Efecto de elevación al pasar el cursor */
-    box-shadow: 0 4px 10px rgba(0, 1, 1, 0.2); /* Sombra más pronunciada al hover */
-    background-color: #f8f9fa; /* Fondo más claro al hover */
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 1, 1, 0.2);
+    background-color: #f8f9fa;
 }
 
 .producto img {
-    border-radius: 8px; /* Bordes redondeados para las imágenes */
+    border-radius: 8px;
 }
 
 .producto h5 {
-    font-weight: bold; /* Títulos en negrita para destacar */
+    font-weight: bold;
 }
 
 .producto strong {
-    color: #167440; /* Precios en verde oscuro para consistencia con el branding */
+    color: #167440;
 }
 
 /* Estilos para el carrito fijo en la parte inferior */
 .fixed-cart {
-    position: fixed; /* Fija el carrito en la parte inferior de la pantalla */
-    bottom: 5px; /* Margen inferior pequeño */
+    position: fixed;
+    bottom: 85px; /* Altura mínima del footer (80px) + un pequeño margen (5px) */
     left: 0;
     right: 0;
-    background: #094229; /* Fondo verde oscuro */
-    color: #ffffff; /* Texto blanco para contraste */
-    padding: 20px 30px; /* Espaciado interno */
-    font-family: 'Baron Neue', sans-serif; /* Fuente consistente */
-    text-align: center; /* Centra el texto */
-    z-index: 1000; /* Asegura que esté sobre otros elementos */
-    width: 100%; /* Ocupa todo el ancho */
-    max-width: 1140px; /* Limita el ancho máximo */
-    margin: 0 auto; /* Centra horizontalmente */
-    border-radius: 25px; /* Bordes redondeados */
-    box-shadow: 0 -2px 5px rgba(0, 1, 1, 0.2); /* Sombra para profundidad */
-    transition: transform 0.3s ease; /* Transición suave para interacciones */
-    display: flex; /* Usa flexbox para alinear elementos */
-    justify-content: space-between; /* Espacia el texto y el total */
-    align-items: center; /* Alinea verticalmente los elementos */
-    font-size: 1.2rem; /* Tamaño de fuente legible */
+    background: #094229;
+    color: #ffffff;
+    padding: 20px 30px;
+    font-family: 'Baron Neue', sans-serif;
+    text-align: center;
+    z-index: 1000;
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    border-radius: 25px;
+    box-shadow: 0 -2px 5px rgba(0, 1, 1, 0.2);
+    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
 }
 
 .fixed-cart:hover {
-    background-image: url('../public/images/fondo-acordeon.png'); /* Cambia a la imagen de fondo al hover */
-    background-size: cover; /* Ajusta la imagen para cubrir el botón */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita repetición de la imagen */
-    color: #000000; /* Texto negro para contraste con la imagen */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa al hover */
+    background-image: url('../public/images/fondo-acordeon.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #000000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .fixed-cart span#fixedTotal {
-    font-weight: bold; /* Resalta el total en negrita */
+    font-weight: bold;
 }
 
 /* Ocultar las flechas nativas de los inputs de tipo number */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none; /* Quita las flechas en Chrome */
+    -webkit-appearance: none;
     margin: 0;
 }
 
 input[type="number"] {
-    -moz-appearance: textfield; /* Quita las flechas en Firefox */
+    -moz-appearance: textfield;
 }
 
 /* Estilos para botones principales */
 .btn-primary {
-    background-color: #167440; /* Verde oscuro para botones primarios */
-    border: none; /* Sin borde para un diseño limpio */
-    font-family: 'Baron Neue', sans-serif; /* Fuente consistente */
-    transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+    background-color: #167440;
+    border: none;
+    font-family: 'Baron Neue', sans-serif;
+    transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #094229; /* Verde más oscuro al pasar el cursor */
+    background-color: #094229;
 }
 
 .btn-success {
-    background-color: #9BA45E; /* Verde claro para botones de éxito */
-    border: none; /* Sin borde para un diseño limpio */
-    font-family: 'Baron Neue', sans-serif; /* Fuente consistente */
-    transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+    background-color: #9BA45E;
+    border: none;
+    font-family: 'Baron Neue', sans-serif;
+    transition: background-color 0.3s ease;
 }
 
 .btn-success:hover {
-    background-color: #167440; /* Verde oscuro al pasar el cursor */
+    background-color: #167440;
 }
 
 .btn-secondary {
-    background-color: #000101; /* Negro casi puro para botones secundarios */
-    border: none; /* Sin borde para un diseño limpio */
-    font-family: 'Baron Neue', sans-serif; /* Fuente consistente */
-    transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+    background-color: #000101;
+    border: none;
+    font-family: 'Baron Neue', sans-serif;
+    transition: background-color 0.3s ease;
 }
 
 .btn-secondary:hover {
-    background-color: #094229; /* Verde oscuro al pasar el cursor */
+    background-color: #094229;
 }
 
 .btn-active {
-    background-color: #9BA45E !important; /* Verde claro para botones activos */
-    color: #ffffff !important; /* Texto blanco para contraste */
+    background-color: #9BA45E !important;
+    color: #ffffff !important;
 }
 
 .quantity-btn {
-    width: 40px; /* Ancho fijo para botones de cantidad */
-    height: 40px; /* Alto fijo para botones de cantidad */
-    background-color: #167440; /* Verde oscuro */
-    color: #ffffff; /* Texto blanco para contraste */
-    border: none; /* Sin borde para un diseño limpio */
+    width: 40px;
+    height: 40px;
+    background-color: #167440;
+    color: #ffffff;
+    border: none;
 }
 
 .quantity-btn:hover {
-    background-color: #094229; /* Verde más oscuro al pasar el cursor */
+    background-color: #094229;
 }
 
 /* Estilos para formularios y modales */
 .modal-content {
-    border-radius: 15px; /* Bordes redondeados para el modal */
-    border: none; /* Sin borde para un diseño limpio */
-    box-shadow: 0 5px 15px rgba(0, 1, 1, 0.3); /* Sombra para profundidad */
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 1, 1, 0.3);
 }
 
 .modal-header {
-    background-color: #094229; /* Fondo verde oscuro para el encabezado del modal */
-    color: #ffffff; /* Texto blanco para contraste */
-    border-top-left-radius: 15px; /* Bordes redondeados superiores izquierda */
-    border-top-right-radius: 15px; /* Bordes redondeados superiores derecha */
+    background-color: #094229;
+    color: #ffffff;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .modal-body {
-    display: flex; /* Usa flexbox para alinear elementos */
-    flex-direction: column; /* Apila los elementos verticalmente */
-    align-items: center; /* Centra los elementos horizontalmente */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .modal-body strong {
-    margin-right: 10px; /* Espacio a la derecha del texto en negrita */
+    margin-right: 10px;
 }
 
 .modal-body .btn-primary {
-    margin-left: 10px; /* Espacio a la izquierda del botón primario */
+    margin-left: 10px;
 }
 
 .price-button-container {
-    display: flex; /* Usa flexbox para alinear precio y botón */
-    align-items: center; /* Alinea verticalmente los elementos */
-    margin-top: 15px; /* Espacio superior */
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
 }
 
 .form-control {
-    border: 1px solid #9BA45E; /* Borde verde claro para inputs */
-    font-family: 'Baron Neue', sans-serif; /* Fuente consistente */
-    border-radius: 8px; /* Bordes redondeados para inputs */
+    border: 1px solid #9BA45E;
+    font-family: 'Baron Neue', sans-serif;
+    border-radius: 8px;
 }
 
 .form-control:focus {
-    border-color: #167440; /* Borde verde oscuro al enfocar */
-    box-shadow: 0 0 5px rgba(22, 116, 64, 0.5); /* Sombra ligera al enfocar */
+    border-color: #167440;
+    box-shadow: 0 0 5px rgba(22, 116, 64, 0.5);
 }
 
 /* Estilos para el mini mapa en el modal del carrito */
 .mini-mapa {
-    width: 100%; /* Ocupa todo el ancho disponible */
-    height: 200px; /* Altura fija para el mapa */
-    border: 0; /* Sin borde para un diseño limpio */
-    border-radius: 10px; /* Bordes redondeados */
-    margin-top: 10px; /* Espacio superior */
+    width: 100%;
+    height: 200px;
+    border: 0;
+    border-radius: 10px;
+    margin-top: 10px;
 }
 
 /* Estilos para el footer (pie de página) */
 footer {
-    background-color: #094229; /* Fondo verde oscuro */
-    color: #ffffff; /* Texto blanco para contraste */
-    text-align: center; /* Centra el texto */
-    font-family: 'Baron Neue', sans-serif; /* Fuente consistente */
-    width: 100%; /* Ocupa todo el ancho */
-    height: auto; /* Altura automática según contenido */
-    min-height: 80px; /* Altura mínima para evitar colapso */
-    z-index: 900; /* Asegura que esté sobre otros elementos */
-    transition: position 0.3s ease; /* Transición suave para cambios de posición */
-    display: flex; /* Usa flexbox para alinear elementos */
-    flex-direction: column; /* Apila los elementos verticalmente */
-    justify-content: center; /* Centra verticalmente */
-    align-items: center; /* Centra horizontalmente */
+    background-color: #094229;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Baron Neue', sans-serif;
+    width: 100%;
+    height: auto;
+    min-height: 80px;
+    z-index: 900;
+    transition: position 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 footer a {
-    color: #fafafa; /* Texto gris claro para enlaces */
-    text-decoration: none; /* Sin subrayado para enlaces */
-    transition: color 0.3s ease; /* Transición suave para cambio de color */
+    color: #fafafa;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 footer a:hover {
-    color: #167440; /* Verde oscuro al pasar el cursor */
+    color: #167440;
+}
+
+footer .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacio entre íconos */
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 footer .social-icons a {
-    margin-top: 5px; /* Espacio superior para íconos */
-    margin-bottom: 5px; /* Espacio inferior para íconos */
-    font-size: 1.8rem; /* Tamaño grande para íconos de redes sociales */
+    font-size: 1.8rem;
+    transition: transform 0.3s ease;
+}
+
+footer .social-icons a:hover {
+    transform: scale(1.2); /* Efecto al pasar el mouse */
 }
 
 footer .designed-by {
-    font-size: 0.9rem; /* Tamaño pequeño para créditos */
-    margin-top: 10px; /* Espacio superior */
-    margin-bottom: 5px; /* Espacio inferior */
+    font-size: 0.9rem;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
 /* Estilos para el spinner (Loader) centrado en pantalla */
 #loading-spinner {
-    position: fixed; /* Fija el spinner en la pantalla */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%; /* Ocupa todo el ancho */
-    height: 100%; /* Ocupa toda la altura */
-    background: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente oscuro */
-    display: flex; /* Mostrar como flex por defecto en React */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    z-index: 3000; /* Asegura que esté sobre otros elementos */
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
 }
 
 .loader {
-    animation: rotate 1s infinite; /* Animación de rotación infinita */
-    height: 50px; /* Tamaño del loader */
-    width: 50px; /* Tamaño del loader */
+    animation: rotate 1s infinite;
+    height: 50px;
+    width: 50px;
 }
 
 .loader:before,
 .loader:after {
-    border-radius: 50%; /* Bordes redondeados para las bolas */
-    content: ""; /* Contenido vacío para pseudo-elementos */
-    display: block; /* Bloque para posicionamiento */
-    height: 20px; /* Tamaño de las bolas */
-    width: 20px; /* Tamaño de las bolas */
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 20px;
+    width: 20px;
 }
 
 .loader:before {
-    animation: ball1 1s infinite; /* Animación para la primera bola */
-    background-color: #ffffff; /* Blanco para la primera bola */
-    box-shadow: 30px 0 0 #167440; /* Sombra para la segunda bola (verde oscuro) */
-    margin-bottom: 10px; /* Espacio inferior */
+    animation: ball1 1s infinite;
+    background-color: #ffffff;
+    box-shadow: 30px 0 0 #167440;
+    margin-bottom: 10px;
 }
 
 .loader:after {
-    animation: ball2 1s infinite; /* Animación para la segunda bola */
-    background-color: #167440; /* Verde oscuro para la segunda bola */
-    box-shadow: 30px 0 0 #ffffff; /* Sombra para la primera bola (blanco) */
+    animation: ball2 1s infinite;
+    background-color: #167440;
+    box-shadow: 30px 0 0 #ffffff;
 }
 
 @keyframes rotate {
-    0% { transform: rotate(0deg) scale(0.8); } /* Inicio de la rotación */
-    50% { transform: rotate(360deg) scale(1.2); } /* Mitad de la rotación, más grande */
-    100% { transform: rotate(720deg) scale(0.8); } /* Fin de la rotación, vuelta al tamaño inicial */
+    0% { transform: rotate(0deg) scale(0.8); }
+    50% { transform: rotate(360deg) scale(1.2); }
+    100% { transform: rotate(720deg) scale(0.8); }
 }
 
 @keyframes ball1 {
-    0% { box-shadow: 30px 0 0 #167440; } /* Posición inicial de la sombra */
-    50% { box-shadow: 0 0 0 #167440; margin-bottom: 0; transform: translate(15px, 15px); } /* Desaparece la sombra */
-    100% { box-shadow: 30px 0 0 #167440; margin-bottom: 10px; } /* Regresa a la posición inicial */
+    0% { box-shadow: 30px 0 0 #167440; }
+    50% { box-shadow: 0 0 0 #167440; margin-bottom: 0; transform: translate(15px, 15px); }
+    100% { box-shadow: 30px 0 0 #167440; margin-bottom: 10px; }
 }
 
 @keyframes ball2 {
-    0% { box-shadow: 30px 0 0 #ffffff; } /* Posición inicial de la sombra */
-    50% { box-shadow: 0 0 0 #ffffff; margin-top: -20px; transform: translate(15px, 15px); } /* Desaparece la sombra */
-    100% { box-shadow: 30px 0 0 #ffffff; margin-top: 0; } /* Regresa al margen superior original */
+    0% { box-shadow: 30px 0 0 #ffffff; }
+    50% { box-shadow: 0 0 0 #ffffff; margin-top: -20px; transform: translate(15px, 15px); }
+    100% { box-shadow: 30px 0 0 #ffffff; margin-top: 0; }
 }
 
 /* Estilos para la pantalla de bienvenida */
 .welcome-screen {
-    position: fixed; /* Fija la pantalla en la ventana */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%; /* Ocupa todo el ancho */
-    height: 100vh; /* Ocupa toda la altura de la ventana */
-    background-image: url('../public/images/background-looki.png'); /* Imagen de fondo */
-    background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
-    background-position: center; /* Centra la imagen */
-    display: flex; /* Usa flexbox para centrar contenido */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    z-index: 2000; /* Asegura que esté sobre otros elementos */
+    width: 100%;
+    height: 100vh;
+    background-image: url('../public/images/background-looki.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
 }
 
 .welcome-content {
-    text-align: center; /* Centra el texto */
-    color: #ffffff; /* Texto blanco para contraste con el fondo */
-    padding: 20px; /* Espaciado interno */
-    background: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente oscuro */
-    border-radius: 15px; /* Bordes redondeados */
+    text-align: center;
+    color: #ffffff;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
 }
 
 .welcome-content h2 {
-    color: #ffffff; /* Texto blanco para consistencia */
-    font-size: 1.5rem; /* Tamaño legible para el mensaje de bienvenida */
-    margin-bottom: 30px; /* Espacio inferior */
-    line-height: 1.5; /* Espaciado entre líneas para mejor legibilidad */
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
 }
 
 .welcome-content img.logo {
-    max-width: 150px; /* Limita el tamaño del logo */
-    margin-bottom: 20px; /* Espacio inferior */
+    max-width: 150px;
+    margin-bottom: 20px;
 }
 
 /* Estilos para el botón de ingreso (btn-loki) */
 .btn-loki {
-    background-color: #1b4332; /* Verde oscuro para el botón */
-    color: #ffd60a; /* Texto amarillo para contraste */
-    border: 2px solid #ffd60a; /* Borde amarillo para destacar */
-    font-family: 'Baron Neue', sans-serif; /* Fuente consistente */
-    font-size: 1.2rem; /* Tamaño legible */
-    padding: 10px 30px; /* Espaciado interno */
-    border-radius: 25px; /* Bordes redondeados */
-    text-transform: uppercase; /* Texto en mayúsculas */
-    cursor: pointer; /* Cambia el cursor para indicar interactividad */
-    transition: all 0.3s ease; /* Transición suave para todos los cambios */
+    background-color: #1b4332;
+    color: #ffd60a;
+    border: 2px solid #ffd60a;
+    font-family: 'Baron Neue', sans-serif;
+    font-size: 1.2rem;
+    padding: 10px 30px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .btn-loki:hover {
-    background-color: #ffd60a; /* Fondo amarillo al pasar el cursor */
-    color: #1b4332; /* Texto verde oscuro para contraste */
-    box-shadow: 0 0 15px rgba(255, 214, 10, 0.8); /* Sombra amarilla para efecto de brillo */
+    background-color: #ffd60a;
+    color: #1b4332;
+    box-shadow: 0 0 15px rgba(255, 214, 10, 0.8);
 }
 
 /* Clase para ocultar contenido inicialmente */
 .hidden {
-    display: none; /* Oculta elementos con esta clase */
+    display: none;
 }
 
+/* Estilos específicos para ConfirmationModal */
+.confirmation-modal {
+    z-index: 5000 !important;
+}
+
+.confirmation-modal .modal-dialog {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.confirmation-modal .modal-content {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border: none;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.confirmation-modal .modal-body {
+    padding: 20px;
+    font-family: 'Baron Neue', sans-serif;
+    font-size: 1.2rem;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+}
+
+.confirmation-modal .modal-body span {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.confirmation-modal .modal-body br {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.confirmation-backdrop {
+    z-index: 4999 !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+@media (max-width: 576px) {
+    .confirmation-modal .modal-dialog {
+        max-width: 90%;
+    }
+    .confirmation-modal .modal-body {
+        font-size: 1rem;
+    }
+    .confirmation-modal .modal-body span {
+        font-size: 2rem;
+    }
+}
 /* Media Queries para dispositivos móviles (pantallas hasta 576px) */
 @media (max-width: 576px) {
     h1 {
-        font-size: 1.8rem; /* Reduce el tamaño del título principal */
+        font-size: 1.8rem;
     }
     .accordion-button {
-        font-size: 1rem; /* Reduce el tamaño del texto en los botones del acordeón */
+        font-size: 1rem;
     }
     .fixed-cart {
-        padding: 10px; /* Reduce el padding del carrito fijo */
-        font-size: 0.9rem; /* Reduce el tamaño del texto en el carrito */
+        padding: 10px;
+        font-size: 0.9rem;
     }
     header h1 {
-        font-size: 1.2rem; /* Reduce el tamaño del título en el header */
+        font-size: 1.2rem;
     }
     header p {
-        font-size: 0.9rem; /* Reduce el tamaño del texto en el header */
+        font-size: 0.9rem;
     }
     .container {
-        margin-top: 120px; /* Ajusta el margen superior para evitar solapamiento */
+        margin-top: 120px;
     }
     .welcome-content h2 {
-        font-size: 1.2rem; /* Reduce el tamaño del texto de bienvenida */
+        font-size: 1.2rem;
     }
     .btn-loki {
-        font-size: 1rem; /* Reduce el tamaño del botón */
-        padding: 8px 20px; /* Reduce el padding del botón */
+        font-size: 1rem;
+        padding: 8px 20px;
     }
     .welcome-content img.logo {
-        max-width: 100px; /* Reduce el tamaño del logo */
+        max-width: 100px;
     }
-}
-
-#confirmationModal {
-    z-index: 1060; /* Mayor que el z-index por defecto de Bootstrap (1050) */
+    .confirmation-modal .modal-dialog {
+        max-width: 300px; /* Más pequeño en móviles */
+        margin: 20vh auto; /* Ajuste vertical */
+    }
 }

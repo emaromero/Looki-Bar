@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,6 +16,7 @@ function App() {
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem("carrito")) || []);
     const [categories, setCategories] = useState({});
     const [currentProduct, setCurrentProduct] = useState(null);
+    const [showCustomizeModal, setShowCustomizeModal] = useState(false);
     const [isWelcome, setIsWelcome] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [showCart, setShowCart] = useState(false);
@@ -30,6 +30,18 @@ function App() {
             cargarProductos();
         }
     }, [isWelcome]);
+
+    const cleanBackdrop = () => {
+        document.body.classList.remove('modal-open');
+        const backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) backdrop.remove();
+    };
+
+    useEffect(() => {
+        if (!currentProduct && !showCustomizeModal && !showCart && !showConfirmation) {
+            cleanBackdrop();
+        }
+    }, [currentProduct, showCustomizeModal, showCart, showConfirmation]);
 
     async function cargarProductos() {
         try {
@@ -60,6 +72,7 @@ function App() {
 
     const openProductModal = (producto) => {
         setCurrentProduct({ ...producto, cantidad: 1, comentario: "" });
+        setShowCustomizeModal(false);
     };
 
     const handleEnter = () => {
@@ -67,7 +80,12 @@ function App() {
     };
 
     const handleProceed = () => {
-        setCurrentProduct(currentProduct); // Mantener el producto actual para CustomizeModal
+        setShowCustomizeModal(true);
+    };
+
+    const showConfirmationAlert = (message) => {
+        setConfirmationMessage(message);
+        setShowConfirmation(true);
     };
 
     if (isWelcome) {
@@ -99,23 +117,30 @@ function App() {
                 <div className="fixed-cart" onClick={() => setShowCart(true)}>
                     Ver carrito <span>${cart.reduce((sum, p) => sum + parseFloat(p.Precio) * p.cantidad, 0).toFixed(2)}</span>
                 </div>
-                {currentProduct && (
-                    <>
-                        <ProductModal
-                            currentProduct={currentProduct}
-                            onClose={() => setCurrentProduct(null)}
-                            onProceed={handleProceed}
-                        />
-                        <CustomizeModal
-                            currentProduct={currentProduct}
-                            setCurrentProduct={setCurrentProduct}
-                            cart={cart}
-                            updateCart={updateCart}
-                        />
-                    </>
+                {currentProduct && !showCustomizeModal && (
+                    <ProductModal
+                        currentProduct={currentProduct}
+                        onClose={() => setCurrentProduct(null)}
+                        onProceed={handleProceed}
+                    />
+                )}
+                {showCustomizeModal && currentProduct && (
+                    <CustomizeModal
+                        currentProduct={currentProduct}
+                        setCurrentProduct={setCurrentProduct}
+                        cart={cart}
+                        updateCart={updateCart}
+                        setShowCustomizeModal={setShowCustomizeModal}
+                        showConfirmationAlert={showConfirmationAlert} // Nueva prop
+                    />
                 )}
                 {showCart && (
-                    <CartModal cart={cart} setCart={updateCart} onClose={() => setShowCart(false)} />
+                    <CartModal
+                        cart={cart}
+                        setCart={updateCart}
+                        onClose={() => setShowCart(false)}
+                        showConfirmationAlert={showConfirmationAlert} // Nueva prop
+                    />
                 )}
                 <ConfirmationModal
                     message={confirmationMessage}
