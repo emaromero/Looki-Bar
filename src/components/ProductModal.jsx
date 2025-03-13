@@ -7,10 +7,11 @@ function ProductModal({ currentProduct, onClose, onProceed }) {
             const modal = new bootstrap.Modal(document.getElementById('popup'), { keyboard: false });
             modal.show();
             return () => {
-                modal.hide(); // Cierra el modal
-                document.body.classList.remove('modal-open'); // Elimina clase que bloquea el scroll
+                modal.hide();
+                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
                 const backdrop = document.querySelector('.modal-backdrop');
-                if (backdrop) backdrop.remove(); // Elimina el backdrop manualmente
+                if (backdrop) backdrop.remove();
             };
         }
     }, [currentProduct]);
@@ -31,6 +32,7 @@ function ProductModal({ currentProduct, onClose, onProceed }) {
                                 const modal = bootstrap.Modal.getInstance(document.getElementById('popup'));
                                 modal.hide();
                                 document.body.classList.remove('modal-open');
+                                document.body.style.overflow = '';
                                 const backdrop = document.querySelector('.modal-backdrop');
                                 if (backdrop) backdrop.remove();
                             }}
@@ -53,6 +55,7 @@ function ProductModal({ currentProduct, onClose, onProceed }) {
                                     const modal = bootstrap.Modal.getInstance(document.getElementById('popup'));
                                     modal.hide();
                                     document.body.classList.remove('modal-open');
+                                    document.body.style.overflow = '';
                                     const backdrop = document.querySelector('.modal-backdrop');
                                     if (backdrop) backdrop.remove();
                                 }}

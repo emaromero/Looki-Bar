@@ -33,6 +33,7 @@ function App() {
 
     const cleanBackdrop = () => {
         document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
         const backdrop = document.querySelector('.modal-backdrop');
         if (backdrop) backdrop.remove();
     };
@@ -131,7 +132,7 @@ function App() {
                         cart={cart}
                         updateCart={updateCart}
                         setShowCustomizeModal={setShowCustomizeModal}
-                        showConfirmationAlert={showConfirmationAlert} // Nueva prop
+                        showConfirmationAlert={showConfirmationAlert}
                     />
                 )}
                 {showCart && (
@@ -139,7 +140,7 @@ function App() {
                         cart={cart}
                         setCart={updateCart}
                         onClose={() => setShowCart(false)}
-                        showConfirmationAlert={showConfirmationAlert} // Nueva prop
+                        showConfirmationAlert={showConfirmationAlert}
                     />
                 )}
                 <ConfirmationModal

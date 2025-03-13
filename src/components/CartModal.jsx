@@ -17,12 +17,16 @@ function CartModal({ cart, setCart, onClose, showConfirmationAlert }) {
         const modal = new bootstrap.Modal(document.getElementById('carrito'), { keyboard: false });
         modal.show();
         document.getElementById('nombre')?.focus();
-        return () => {
+
+        const cleanUpModal = () => {
             modal.hide();
             document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
             const backdrop = document.querySelector('.modal-backdrop');
             if (backdrop) backdrop.remove();
         };
+
+        return cleanUpModal;
     }, []);
 
     useEffect(() => {
@@ -30,30 +34,39 @@ function CartModal({ cart, setCart, onClose, showConfirmationAlert }) {
             const footer = document.querySelector("footer");
             const cartElement = document.querySelector(".fixed-cart");
             if (!footer || !cartElement) return;
-    
+
             const footerHeight = footer.offsetHeight;
             const cartHeight = cartElement.offsetHeight;
             const windowHeight = window.innerHeight;
             const scrollPosition = window.pageYOffset;
             const documentHeight = document.documentElement.scrollHeight;
-    
-            // Si estamos cerca del footer, ajustar el carrito para que no se superponga
+
             if (scrollPosition + windowHeight > documentHeight - footerHeight) {
-                cartElement.style.bottom = `${footerHeight + 5}px`; // 5px de margen adicional
+                cartElement.style.bottom = `${footerHeight + 5}px`;
             } else {
-                cartElement.style.bottom = "85px"; // Valor por defecto
+                cartElement.style.bottom = "85px";
             }
         };
-    
+
         window.addEventListener("scroll", adjustCartPosition);
         window.addEventListener("resize", adjustCartPosition);
         adjustCartPosition();
-    
+
         return () => {
             window.removeEventListener("scroll", adjustCartPosition);
             window.removeEventListener("resize", adjustCartPosition);
         };
     }, []);
+
+    const handleClose = () => {
+        const modal = bootstrap.Modal.getInstance(document.getElementById('carrito'));
+        modal.hide();
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+        const backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) backdrop.remove();
+        onClose();
+    };
 
     const handleDelivery = () => {
         setDelivery(true);
@@ -125,7 +138,7 @@ function CartModal({ cart, setCart, onClose, showConfirmationAlert }) {
 
         setTimeout(() => {
             window.open(`https://wa.me/5491140445556?text=${encodeURIComponent(mensaje)}`);
-            onClose();
+            handleClose();
         }, 1000);
     };
 
@@ -138,11 +151,7 @@ function CartModal({ cart, setCart, onClose, showConfirmationAlert }) {
                         <button
                             type="button"
                             className="btn-close"
-                            onClick={() => {
-                                onClose();
-                                const modal = bootstrap.Modal.getInstance(document.getElementById('carrito'));
-                                modal.hide();
-                            }}
+                            onClick={handleClose}
                             aria-label="Cerrar"
                         ></button>
                     </div>

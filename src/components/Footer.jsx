@@ -5,10 +5,10 @@ function Footer() {
         <footer>
             <div className="social-icons">
                 <a href="https://www.instagram.com/lookibar/" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-instagram"></i>
+                    <i className="fa-brands fa-instagram"></i>
                 </a>
                 <a href="https://www.facebook.com/profile.php?id=61572603162921&ref=ig_profile_ac" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-facebook"></i>
+                    <i className="fa-brands fa-facebook"></i>
                 </a>
             </div>
             <p>

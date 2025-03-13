@@ -10,6 +10,10 @@ function ConfirmationModal({ message, isOpen, onClose }) {
 
             const timer = setTimeout(() => {
                 modal.hide();
+                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) backdrop.remove();
                 onClose();
             }, 1500);
 
@@ -17,6 +21,7 @@ function ConfirmationModal({ message, isOpen, onClose }) {
                 clearTimeout(timer);
                 modal.hide();
                 document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
                 const backdrop = document.querySelector('.modal-backdrop');
                 if (backdrop) backdrop.remove();
             };
