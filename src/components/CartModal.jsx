@@ -127,13 +127,13 @@ function CartModal({ cart, setCart, onClose, showConfirmationAlert }) {
         if (orderComment) mensaje += `Comentario: ${orderComment}\n`;
         if (coupon) mensaje += `Cupón: ${coupon}\n`;
 
-        // Mostrar confirmación
+        // Mostrar confirmación brevemente antes de redirigir
         showConfirmationAlert(`
             <span style="color: green; font-size: 2rem;">✅</span><br>
             ¡Tu pedido ha sido enviado con éxito!
         `);
 
-        // Cerrar el modal antes de abrir WhatsApp
+        // Cerrar el modal inmediatamente
         const cartModal = bootstrap.Modal.getInstance(document.getElementById('carrito'));
         cartModal.hide();
         document.body.classList.remove('modal-open');
@@ -141,16 +141,11 @@ function CartModal({ cart, setCart, onClose, showConfirmationAlert }) {
         const backdrop = document.querySelector('.modal-backdrop');
         if (backdrop) backdrop.remove();
 
-        // Construir la URL de WhatsApp y abrirla
+        // Redirigir a WhatsApp de inmediato
         const whatsappUrl = `https://wa.me/5491140445556?text=${encodeURIComponent(mensaje)}`;
         console.log("WhatsApp URL:", whatsappUrl); // Para depuración
-        setTimeout(() => {
-            const newWindow = window.open(whatsappUrl, '_blank');
-            if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-                alert("No se pudo abrir WhatsApp. Por favor, asegúrate de que no esté bloqueado por tu navegador.");
-            }
-            handleClose(); // Cerrar el modal completamente después de intentar abrir WhatsApp
-        }, 1000);
+        window.location.href = whatsappUrl; // Envío inmediato
+        handleClose(); // Asegurar que el modal se cierre
     };
 
     return (
