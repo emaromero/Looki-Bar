@@ -35,16 +35,32 @@ function CartModal({ cart, setCart, onClose, showConfirmationAlert }) {
             const cartElement = document.querySelector(".fixed-cart");
             if (!footer || !cartElement) return;
 
-            const footerHeight = footer.offsetHeight;
+            const footerRect = footer.getBoundingClientRect();
             const windowHeight = window.innerHeight;
-            const scrollPosition = window.pageYOffset;
-            const documentHeight = document.documentElement.scrollHeight;
 
-            if (scrollPosition + windowHeight > documentHeight - footerHeight) {
-                cartElement.style.bottom = `${footerHeight + 5}px`;
+            // Verificar si el footer está visible en la ventana
+            const isFooterVisible = footerRect.top < windowHeight && footerRect.bottom > 0;
+            const footerHeight = footer.offsetHeight;
+            const marginAboveFooter = 10; // Margen por encima del footer cuando está visible
+
+            if (isFooterVisible) {
+                // Footer está visible: proyectar el carrito justo encima del footer
+                const spaceToFooter = windowHeight - footerRect.top - footerHeight;
+                const newBottom = Math.max(5, spaceToFooter + marginAboveFooter); // Mínimo 5px
+                cartElement.style.bottom = `${newBottom}px`;
             } else {
-                cartElement.style.bottom = "85px";
+                // Footer no está visible: posicionar el carrito completamente abajo
+                cartElement.style.bottom = `0px`;
             }
+
+            // Debugging: Mostrar valores en consola para verificar
+            console.log({
+                isFooterVisible,
+                footerTop: footerRect.top,
+                windowHeight,
+                footerHeight,
+                bottom: cartElement.style.bottom,
+            });
         };
 
         window.addEventListener("scroll", adjustCartPosition);
@@ -223,6 +239,7 @@ function CartModal({ cart, setCart, onClose, showConfirmationAlert }) {
                                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3292.708605698858!2d-58.846448!3d-34.4149642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bc9dc154eca599%3A0x2270a90209fea6f8!2sR.%20Caama%C3%B1o%20844%2C%20B1631%20Villa%20Rosa%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1698259200000!5m2!1ses!2sar"
                                         allowFullScreen=""
                                         loading="lazy"
+                                        title="Mapa de ubicación de Av Caamaño 844, Pilar"
                                     ></iframe>
                                 </div>
                             )}

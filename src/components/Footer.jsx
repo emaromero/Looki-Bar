@@ -4,7 +4,7 @@ function Footer() {
     return (
         <footer>
             <div className="social-icons">
-                <a href="https://www.instagram.com/lookibar/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.instagram.com/looki.bar/" target="_blank" rel="noopener noreferrer">
                     <i className="fa-brands fa-instagram"></i>
                 </a>
                 <a href="https://www.facebook.com/profile.php?id=61572603162921&ref=ig_profile_ac" target="_blank" rel="noopener noreferrer">
