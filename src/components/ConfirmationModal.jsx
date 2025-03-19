@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import * as bootstrap from 'bootstrap';
 import '../styles.css';
+import { cleanModalBackdrop } from './ModalUtils'; // Ajustada la importación
 
 function ConfirmationModal({ message, isOpen, onClose }) {
     useEffect(() => {
@@ -10,20 +11,14 @@ function ConfirmationModal({ message, isOpen, onClose }) {
 
             const timer = setTimeout(() => {
                 modal.hide();
-                document.body.classList.remove('modal-open');
-                document.body.style.overflow = '';
-                const backdrop = document.querySelector('.modal-backdrop');
-                if (backdrop) backdrop.remove();
+                cleanModalBackdrop();
                 onClose();
             }, 1500);
 
             return () => {
                 clearTimeout(timer);
                 modal.hide();
-                document.body.classList.remove('modal-open');
-                document.body.style.overflow = '';
-                const backdrop = document.querySelector('.modal-backdrop');
-                if (backdrop) backdrop.remove();
+                cleanModalBackdrop();
             };
         }
     }, [isOpen, onClose]);
@@ -31,9 +26,9 @@ function ConfirmationModal({ message, isOpen, onClose }) {
     if (!isOpen) return null;
 
     return (
-        <div className="modal fade" id="confirmationModal" tabIndex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div className="modal fade confirmation-modal" id="confirmationModal" tabIndex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content confirmation-content">
+                <div className="modal-content">
                     <div className="modal-body text-center">
                         <div dangerouslySetInnerHTML={{ __html: message }} />
                     </div>

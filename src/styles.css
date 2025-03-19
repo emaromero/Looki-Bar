@@ -1,8 +1,20 @@
 /* src/styles.css */
 /* Copyright @cloverdigital.arg 2025 */
-/* Estilos generales para el sitio web de Looki Bar, incluyendo tipografía personalizada, diseño del header, acordeón, footer, modales, carrito fijo, y responsive design con media queries. */
+/* Estilos optimizados con variables CSS y diseño responsivo mejorado */
 
-/* Cargar la fuente personalizada 'Baron Neue' */
+:root {
+    --font-primary: 'Baron Neue', sans-serif;
+    --radius-default: 15px;
+    --color-primary: #167440;
+    --color-secondary: #094229;
+    --color-accent: #ffd60a;
+    --color-bg-dark: #1a1a1a;
+    --color-text-muted: #0B361B;
+    --color-white: #ffffff;
+    --shadow-default: 0 4px 10px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
 @font-face {
     font-family: 'Baron Neue';
     src: url('../public/fonts/Baron Neue.otf') format('opentype');
@@ -10,53 +22,38 @@
     font-style: normal;
 }
 
-/* Estilos generales para el cuerpo de la página */
 body {
     background-color: #000000;
     margin: 0;
     padding: 0;
-    font-family: 'Baron Neue', sans-serif;
+    font-family: var(--font-primary);
     color: #000101;
 }
 
-/* Estilos para encabezados (h1, h2, h5) */
 h1, h2, h5 {
-    font-family: 'Baron Neue', sans-serif;
-    color: #094229;
+    font-family: var(--font-primary);
+    color: var(--color-secondary);
 }
 
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-}
+h1 { font-size: 2.5rem; margin-bottom: 2rem; }
+h5 { font-size: 1.25rem; }
+.modal-header h5 { color: var(--color-white); }
 
-h5 {
-    font-size: 1.25rem;
-}
-
-/* Título del modal en blanco para contraste con el fondo oscuro */
-.modal-header h5 {
-    color: #ffffff;
-}
-
-/* Estilos para textos mutados y botones del acordeón */
 .text-muted, .accordion-button {
-    font-family: 'Baron Neue', sans-serif;
-    color: #0B361B;
+    font-family: var(--font-primary);
+    color: var(--color-text-muted);
 }
 
-/* Estilos para el header (encabezado superior) */
 header {
     background-image: url('../public/images/fondo-header1.jpg');
     background-repeat: no-repeat;
     background-size: auto;
     background-position: center;
-    padding: 15px 0;
+    padding: 15px 0 5px 0;
     text-align: center;
-    top: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 1, 1, 0.1);
+    box-shadow: var(--shadow-default);
 }
 
 .header-content {
@@ -65,49 +62,26 @@ header {
     align-items: center;
 }
 
-header img.logo {
-    max-width: 100px;
-    margin-bottom: 10px;
-}
+header img.logo { max-width: 100px; margin-bottom: 10px; }
+header h1 { font-size: 1.8rem; margin: 0 0 10px; }
+header p { font-family: var(--font-primary); color: var(--color-white); margin: 0; font-size: 1rem; }
+header p i { margin-right: 5px; }
 
-header h1 {
-    font-size: 1.8rem;
-    margin: 0;
-    margin-bottom: 10px;
-}
-
-header p {
-    font-family: 'Baron Neue', sans-serif;
-    color: #ffffff;
-    margin: 0;
-    font-size: 1rem;
-}
-
-header p i {
-    margin-right: 5px;
-}
-
-/* Contenedor principal */
 .container {
     padding: 20px;
-    margin-top: 150px;
-    margin-bottom: 80px;
+    margin-top: 50px;
+    margin-bottom: 20px; /* Reducido para que el footer no quede tan lejos */
 }
 
-/* Estilos para el contenedor de categorías (Accordion) */
-#categorias-container {
-    margin-bottom: 80px;
-}
+#categorias-container { margin-bottom: 20px; }
 
-/* Estilos para cada item del acordeón */
 .accordion-item {
     border: none;
-    background-color: #1a1a1a;
+    background-color: var(--color-bg-dark);
     margin-bottom: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-default);
 }
 
-/* Estilos para los botones del acordeón */
 .accordion-button {
     background-image: url('../public/images/fondo-acordeon.png');
     background-size: cover;
@@ -115,95 +89,79 @@ header p i {
     background-repeat: no-repeat;
     color: #000000;
     font-size: 1.2rem;
-    font-family: 'Baron Neue', sans-serif;
+    font-family: var(--font-primary);
     border: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-default);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .accordion-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-hover);
 }
 
-/* Estilos para el botón cuando está expandido */
 .accordion-button:not(.collapsed) {
     background-image: url('../public/images/fondo-acordeon.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     color: #000000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-hover);
 }
 
-/* Estilos para el foco del botón */
 .accordion-button:focus {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     outline: none;
 }
 
-/* Estilos para la flecha del acordeón (usando SVG) */
 .accordion-button::after {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 }
 
 .accordion-button:not(.collapsed)::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
     transform: rotate(180deg);
 }
 
-/* Estilos para el cuerpo del acordeón */
 .accordion-body {
-    background-color: #1a1a1a;
+    background-color: var(--color-bg-dark);
     padding: 15px;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos para los productos dentro del acordeón */
 .producto {
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    background-color: #ffffff;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    background-color: var(--color-white);
     border: 1px solid #9BA45E;
-    border-radius: 10px;
+    border-radius: var(--radius-default);
 }
 
 .producto:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0, 1, 1, 0.2);
+    box-shadow: var(--shadow-default);
     background-color: #f8f9fa;
 }
 
-.producto img {
-    border-radius: 8px;
-}
+.producto img { border-radius: 8px; }
+.producto h5 { font-weight: bold; }
+.producto strong { color: var(--color-primary); }
 
-.producto h5 {
-    font-weight: bold;
-}
-
-.producto strong {
-    color: #167440;
-}
-
-/* Estilos para el carrito fijo en la parte inferior */
 .fixed-cart {
     position: fixed;
     bottom: 5px;
     left: 0;
     right: 0;
-    background: #094229;
-    color: #ffffff;
+    background: var(--color-secondary);
+    color: var(--color-white);
     padding: 20px 30px;
-    font-family: 'Baron Neue', sans-serif;
+    font-family: var(--font-primary);
     text-align: center;
     z-index: 1000;
     width: 100%;
     max-width: 1140px;
     margin: 0 auto;
     border-radius: 25px;
-    box-shadow: 0 -2px 5px rgba(0, 1, 1, 0.2);
-    transition: transform 0.3s ease;
+    box-shadow: var(--shadow-default);
+    transition: background 0.3s ease;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -214,89 +172,68 @@ header p i {
     background-image: url('../public/images/fondo-acordeon.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     color: #000000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.fixed-cart span#fixedTotal {
-    font-weight: bold;
-}
-
-/* Ocultar las flechas nativas de los inputs de tipo number */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-input[type="number"] {
-    -moz-appearance: textfield;
-}
+input[type="number"] { -moz-appearance: textfield; }
 
-/* Estilos para botones principales */
 .btn-primary {
-    background-color: #167440;
+    background-color: var(--color-primary);
     border: none;
-    font-family: 'Baron Neue', sans-serif;
+    font-family: var(--font-primary);
     transition: background-color 0.3s ease;
 }
 
-.btn-primary:hover {
-    background-color: #094229;
-}
+.btn-primary:hover { background-color: var(--color-secondary); }
+.btn-primary:focus { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 
 .btn-success {
     background-color: #9BA45E;
     border: none;
-    font-family: 'Baron Neue', sans-serif;
+    font-family: var(--font-primary);
     transition: background-color 0.3s ease;
 }
 
-.btn-success:hover {
-    background-color: #167440;
-}
+.btn-success:hover { background-color: var(--color-primary); }
 
 .btn-secondary {
     background-color: #000101;
     border: none;
-    font-family: 'Baron Neue', sans-serif;
+    font-family: var(--font-primary);
     transition: background-color 0.3s ease;
 }
 
-.btn-secondary:hover {
-    background-color: #094229;
-}
+.btn-secondary:hover { background-color: var(--color-secondary); }
 
-.btn-active {
-    background-color: #9BA45E !important;
-    color: #ffffff !important;
-}
+.btn-active { background-color: #9BA45E !important; color: var(--color-white) !important; }
 
 .quantity-btn {
     width: 40px;
     height: 40px;
-    background-color: #167440;
-    color: #ffffff;
+    background-color: var(--color-primary);
+    color: var(--color-white);
     border: none;
 }
 
-.quantity-btn:hover {
-    background-color: #094229;
-}
+.quantity-btn:hover { background-color: var(--color-secondary); }
 
-/* Estilos para formularios y modales */
 .modal-content {
-    border-radius: 15px;
+    border-radius: var(--radius-default);
     border: none;
-    box-shadow: 0 5px 15px rgba(0, 1, 1, 0.3);
+    box-shadow: var(--shadow-default);
 }
 
 .modal-header {
-    background-color: #094229;
-    color: #ffffff;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    border-top-left-radius: var(--radius-default);
+    border-top-right-radius: var(--radius-default);
 }
 
 .modal-body {
@@ -305,32 +242,24 @@ input[type="number"] {
     align-items: center;
 }
 
-.modal-body strong {
-    margin-right: 10px;
-}
-
-.modal-body .btn-primary {
-    margin-left: 10px;
-}
-
 .price-button-container {
     display: flex;
     align-items: center;
     margin-top: 15px;
+    gap: 20px; /* Añade 20px de separación entre el precio y el botón */
 }
 
 .form-control {
     border: 1px solid #9BA45E;
-    font-family: 'Baron Neue', sans-serif;
+    font-family: var(--font-primary);
     border-radius: 8px;
 }
 
 .form-control:focus {
-    border-color: #167440;
+    border-color: var(--color-primary);
     box-shadow: 0 0 5px rgba(22, 116, 64, 0.5);
 }
 
-/* Estilos para el mini mapa en el modal del carrito */
 .mini-mapa {
     width: 100%;
     height: 200px;
@@ -339,57 +268,32 @@ input[type="number"] {
     margin-top: 10px;
 }
 
-/* Estilos para el footer (pie de página) */
 footer {
-    background-color: #094229;
-    color: #ffffff;
+    background-color: var(--color-secondary);
+    color: var(--color-white);
     text-align: center;
-    font-family: 'Baron Neue', sans-serif;
+    font-family: var(--font-primary);
     width: 100%;
-    height: auto;
-    min-height: 80px;
+    padding: 20px 0; /* Ajustado para que no sea fijo */
     z-index: 900;
-    transition: position 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    margin-bottom: 45px;
 }
 
-footer a {
-    color: #fafafa;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-footer a:hover {
-    color: #167440;
-}
+footer a { color: #fafafa; text-decoration: none; transition: color 0.3s ease; }
+footer a:hover { color: var(--color-primary); }
 
 footer .social-icons {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
-footer .social-icons a {
-    font-size: 1.8rem;
-    transition: transform 0.3s ease;
-}
+footer .social-icons a { font-size: 1.8rem; transition: transform 0.3s ease; }
+footer .social-icons a:hover { transform: scale(1.2); }
 
-footer .social-icons a:hover {
-    transform: scale(1.2);
-}
+footer .designed-by { font-size: 0.9rem; margin: 10px 0 5px; }
 
-footer .designed-by {
-    font-size: 0.9rem;
-    margin-top: 10px;
-    margin-bottom: 5px;
-}
-
-/* Estilos para el spinner (Loader) centrado en pantalla */
 #loading-spinner {
     position: fixed;
     top: 0;
@@ -420,15 +324,15 @@ footer .designed-by {
 
 .loader:before {
     animation: ball1 1s infinite;
-    background-color: #ffffff;
-    box-shadow: 30px 0 0 #167440;
+    background-color: var(--color-white);
+    box-shadow: 30px 0 0 var(--color-primary);
     margin-bottom: 10px;
 }
 
 .loader:after {
     animation: ball2 1s infinite;
-    background-color: #167440;
-    box-shadow: 30px 0 0 #ffffff;
+    background-color: var(--color-primary);
+    box-shadow: 30px 0 0 var(--color-white);
 }
 
 @keyframes rotate {
@@ -438,18 +342,17 @@ footer .designed-by {
 }
 
 @keyframes ball1 {
-    0% { box-shadow: 30px 0 0 #167440; }
-    50% { box-shadow: 0 0 0 #167440; margin-bottom: 0; transform: translate(15px, 15px); }
-    100% { box-shadow: 30px 0 0 #167440; margin-bottom: 10px; }
+    0% { box-shadow: 30px 0 0 var(--color-primary); }
+    50% { box-shadow: 0 0 0 var(--color-primary); margin-bottom: 0; transform: translate(15px, 15px); }
+    100% { box-shadow: 30px 0 0 var(--color-primary); margin-bottom: 10px; }
 }
 
 @keyframes ball2 {
-    0% { box-shadow: 30px 0 0 #ffffff; }
-    50% { box-shadow: 0 0 0 #ffffff; margin-top: -20px; transform: translate(15px, 15px); }
-    100% { box-shadow: 30px 0 0 #ffffff; margin-top: 0; }
+    0% { box-shadow: 30px 0 0 var(--color-white); }
+    50% { box-shadow: 0 0 0 var(--color-white); margin-top: -20px; transform: translate(15px, 15px); }
+    100% { box-shadow: 30px 0 0 var(--color-white); margin-top: 0; }
 }
 
-/* Estilos para la pantalla de bienvenida */
 .welcome-screen {
     position: fixed;
     top: 0;
@@ -467,30 +370,26 @@ footer .designed-by {
 
 .welcome-content {
     text-align: center;
-    color: #ffffff;
+    color: var(--color-white);
     padding: 20px;
     background: rgba(0, 0, 0, 0.5);
-    border-radius: 15px;
+    border-radius: var(--radius-default);
 }
 
 .welcome-content h2 {
-    color: #ffffff;
+    color: var(--color-white);
     font-size: 1.5rem;
     margin-bottom: 30px;
     line-height: 1.5;
 }
 
-.welcome-content img.logo {
-    max-width: 150px;
-    margin-bottom: 20px;
-}
+.welcome-content img.logo { max-width: 150px; margin-bottom: 20px; }
 
-/* Estilos para el botón de ingreso (btn-loki) */
 .btn-loki {
     background-color: #1b4332;
-    color: #ffd60a;
-    border: 2px solid #ffd60a;
-    font-family: 'Baron Neue', sans-serif;
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
+    font-family: var(--font-primary);
     font-size: 1.2rem;
     padding: 10px 30px;
     border-radius: 25px;
@@ -499,39 +398,50 @@ footer .designed-by {
     transition: all 0.3s ease;
 }
 
+/* Estilo para los botones de Delivery y Takeaway */
+.btn-delivery-takeaway {
+    background-color: #000000; /* Negro por defecto */
+    color: #ffffff;
+    border: none;
+    font-family: var(--font-primary);
+    transition: background-color 0.3s ease;
+    margin-right: 10px; /* Espacio entre botones */
+}
+
+.btn-delivery-takeaway:hover {
+    background-color: #333333; /* Gris oscuro al pasar el mouse si no está seleccionado */
+}
+
+.btn-selected {
+    background-color: #9BA45E !important; /* Verde cuando está seleccionado */
+    color: #ffffff !important;
+}
+
+.select-option-text {
+    font-family: var(--font-primary);
+    color: var(--color-text-muted);
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
 .btn-loki:hover {
-    background-color: #ffd60a;
+    background-color: var(--color-accent);
     color: #1b4332;
     box-shadow: 0 0 15px rgba(255, 214, 10, 0.8);
 }
 
-/* Clase para ocultar contenido inicialmente */
-.hidden {
-    display: none;
-}
-
-/* Estilos específicos para ConfirmationModal */
-.confirmation-modal {
-    z-index: 5000 !important;
-}
-
-.confirmation-modal .modal-dialog {
-    max-width: 400px;
-    margin: 0 auto;
-}
+.hidden { display: none; }
 
 .confirmation-modal .modal-content {
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border: none;
+    background-color: var(--color-white);
+    border-radius: var(--radius-default);
+    box-shadow: var(--shadow-default);
     padding: 20px;
-    overflow: hidden;
 }
 
 .confirmation-modal .modal-body {
     padding: 20px;
-    font-family: 'Baron Neue', sans-serif;
+    font-family: var(--font-primary);
     font-size: 1.2rem;
     color: #333;
     display: flex;
@@ -541,65 +451,14 @@ footer .designed-by {
     min-height: 120px;
 }
 
-.confirmation-modal .modal-body span {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-.confirmation-modal .modal-body br {
-    display: block;
-    margin-bottom: 10px;
-}
-
-.confirmation-backdrop {
-    z-index: 4999 !important;
-    background-color: rgba(0, 0, 0, 0.5) !important;
-}
-
 @media (max-width: 576px) {
-    .confirmation-modal .modal-dialog {
-        max-width: 90%;
-    }
-    .confirmation-modal .modal-body {
-        font-size: 1rem;
-    }
-    .confirmation-modal .modal-body span {
-        font-size: 2rem;
-    }
-}
-/* Media Queries para dispositivos móviles (pantallas hasta 576px) */
-@media (max-width: 576px) {
-    h1 {
-        font-size: 1.8rem;
-    }
-    .accordion-button {
-        font-size: 1rem;
-    }
-    .fixed-cart {
-        padding: 10px;
-        font-size: 0.9rem;
-    }
-    header h1 {
-        font-size: 1.2rem;
-    }
-    header p {
-        font-size: 0.9rem;
-    }
-    .container {
-        margin-top: 120px;
-    }
-    .welcome-content h2 {
-        font-size: 1.2rem;
-    }
-    .btn-loki {
-        font-size: 1rem;
-        padding: 8px 20px;
-    }
-    .welcome-content img.logo {
-        max-width: 100px;
-    }
-    .confirmation-modal .modal-dialog {
-        max-width: 300px;
-        margin: 20vh auto;
-    }
+    h1 { font-size: 1.8rem; }
+    .accordion-button { font-size: 1rem; }
+    .fixed-cart { padding: 10px; font-size: 0.9rem; }
+    header h1 { font-size: 1.2rem; }
+    header p { font-size: 0.9rem; }
+    .container { margin-top: 120px; }
+    .welcome-content h2 { font-size: 1.2rem; }
+    .btn-loki { font-size: 1rem; padding: 8px 20px; }
+    .welcome-content img.logo { max-width: 100px; }
 }

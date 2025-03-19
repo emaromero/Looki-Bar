@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as bootstrap from 'bootstrap';
+import { cleanModalBackdrop } from './ModalUtils';
 
 function CustomizeModal({ currentProduct, setCurrentProduct, cart, updateCart, setShowCustomizeModal, showConfirmationAlert }) {
     const [quantity, setQuantity] = useState(1);
@@ -12,10 +13,7 @@ function CustomizeModal({ currentProduct, setCurrentProduct, cart, updateCart, s
             document.getElementById('cantidadInput')?.focus();
             return () => {
                 modal.hide();
-                document.body.classList.remove('modal-open');
-                document.body.style.overflow = '';
-                const backdrop = document.querySelector('.modal-backdrop');
-                if (backdrop) backdrop.remove();
+                cleanModalBackdrop();
             };
         }
     }, [currentProduct]);
@@ -32,11 +30,12 @@ function CustomizeModal({ currentProduct, setCurrentProduct, cart, updateCart, s
 
         const modal = bootstrap.Modal.getInstance(document.getElementById('personalizar'));
         modal.hide();
+        cleanModalBackdrop();
 
         showConfirmationAlert(`
             <span style="color: green; font-size: 2rem;">✅</span><br>
-            ${updatedProduct.Nombre} ha sido agregado con éxito
-        `);
+            ${updatedProduct.nombre} ha sido agregado con éxito
+        `); // Cambiado de Nombre a nombre
 
         setQuantity(1);
         setComment('');

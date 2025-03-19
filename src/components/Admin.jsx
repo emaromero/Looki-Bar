@@ -1,53 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { fetchProducts } from './api.js';
 
-const SHEET_URL = "https://opensheet.elk.sh/1oVfG1dhrkutkOWe7hELdONDnQyRTtSYITpoYHvpTZLQ/menu";
-const PASSWORD_CORRECTA = ""; // Cambia esta contraseña según necesites
+const PASSWORD_CORRECTA = process.env.REACT_APP_ADMIN_PASSWORD;
 
 function Admin() {
+    const [password, setPassword] = useState("");
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
 
-    useEffect(() => {
-        const pass = prompt("Ingrese la contraseña de administrador:");
-        if (pass === PASSWORD_CORRECTA) {
+    const handleLogin = (e) => {
+        e.preventDefault();
+        if (password === PASSWORD_CORRECTA) {
             setIsAuthenticated(true);
             cargarProductos();
         } else {
-            setIsAuthenticated(false);
+            setMessage("❌ Contraseña incorrecta");
         }
-    }, []);
+    };
 
     async function cargarProductos() {
         setLoading(true);
         try {
-            const response = await fetch(SHEET_URL);
-            const data = await response.json();
-            console.log("📥 Datos recibidos de Google Sheets:", data);
-
-            const productos = data.map(row => ({
-                nombre: row.Nombre || "Sin nombre",
-                descripcion: row.Descripción || "Sin descripción",
-                precio: row.Precio ? parseFloat(row.Precio) : 0,
-                imagen: row.Imagen && row.Imagen.trim() !== "" ? row.Imagen : "https://via.placeholder.com/150",
-                categoria: row.Categoría || "Sin categoría",
-                activo: row.Activo === "SI"
-            }));
-
-            localStorage.setItem('productos', JSON.stringify(productos));
-            setProducts(productos.filter(product => product.activo));
-            setLoading(false);
-            setMessage("✅ Productos actualizados correctamente.");
+            const cachedProducts = JSON.parse(localStorage.getItem('productos'));
+            if (cachedProducts) {
+                setProducts(cachedProducts.filter(product => product.activo));
+                setMessage("✅ Productos cargados desde caché.");
+            } else {
+                const productos = await fetchProducts();
+                localStorage.setItem('productos', JSON.stringify(productos));
+                setProducts(productos.filter(product => product.activo));
+                setMessage("✅ Productos actualizados desde Google Sheets.");
+            }
         } catch (error) {
-            console.error('❌ Error al obtener los productos:', error);
-            setLoading(false);
             setMessage("❌ Error al cargar productos.");
+        } finally {
+            setLoading(false);
         }
     }
 
     if (!isAuthenticated) {
-        return <h2 className="text-center text-danger mt-5">Acceso denegado</h2>;
+        return (
+            <div className="container mt-5">
+                <h2 className="text-center">Iniciar sesión como administrador</h2>
+                <form onSubmit={handleLogin} className="d-flex flex-column align-items-center">
+                    <input
+                        type="password"
+                        className="form-control w-25 mt-3"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Contraseña"
+                    />
+                    <button type="submit" className="btn btn-primary mt-3">Ingresar</button>
+                </form>
+                <p className="text-center mt-3 text-danger">{message}</p>
+            </div>
+        );
     }
 
     const categories = {};

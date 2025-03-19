@@ -8,9 +8,9 @@ import ProductModal from './components/ProductModal.jsx';
 import CustomizeModal from './components/CustomizeModal.jsx';
 import CartModal from './components/CartModal.jsx';
 import ConfirmationModal from './components/ConfirmationModal.jsx';
+import Admin from './components/Admin.jsx';
+import { fetchProducts } from './components/api.js';
 import './styles.css';
-
-const SHEET_URL = "https://opensheet.elk.sh/1oVfG1dhrkutkOWe7hELdONDnQyRTtSYITpoYHvpTZLQ/menu";
 
 function App() {
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem("carrito")) || []);
@@ -31,37 +31,22 @@ function App() {
         }
     }, [isWelcome]);
 
-    const cleanBackdrop = () => {
-        document.body.classList.remove('modal-open');
-        document.body.style.overflow = '';
-        const backdrop = document.querySelector('.modal-backdrop');
-        if (backdrop) backdrop.remove();
-    };
-
-    useEffect(() => {
-        if (!currentProduct && !showCustomizeModal && !showCart && !showConfirmation) {
-            cleanBackdrop();
-        }
-    }, [currentProduct, showCustomizeModal, showCart, showConfirmation]);
-
     async function cargarProductos() {
+        setIsLoading(true);
         try {
-            const response = await fetch(SHEET_URL);
-            if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
-            const data = await response.json();
+            const data = await fetchProducts();
             const categorias = {};
             data.forEach(producto => {
-                if (producto.Activo === "SI") {
-                    const categoria = producto.Categoría || "Sin categoría";
+                if (producto.activo) {
+                    const categoria = producto.categoria || "Sin categoría";
                     if (!categorias[categoria]) categorias[categoria] = [];
                     categorias[categoria].push(producto);
                 }
             });
             setCategories(Object.keys(categorias).length ? categorias : { error: "No hay productos disponibles." });
-            setIsLoading(false);
         } catch (error) {
-            console.error("Error al cargar productos:", error);
             setCategories({ error: "No se pudieron cargar los productos." });
+        } finally {
             setIsLoading(false);
         }
     }
@@ -76,13 +61,9 @@ function App() {
         setShowCustomizeModal(false);
     };
 
-    const handleEnter = () => {
-        setIsWelcome(false);
-    };
+    const handleEnter = () => setIsWelcome(false);
 
-    const handleProceed = () => {
-        setShowCustomizeModal(true);
-    };
+    const handleProceed = () => setShowCustomizeModal(true);
 
     const showConfirmationAlert = (message) => {
         setConfirmationMessage(message);
@@ -110,13 +91,15 @@ function App() {
             )}
             <div id="app-content" className={!isLoading ? '' : 'hidden'}>
                 <Header />
-                <div className="container mt-4">
+                <div className="container">
                     <Routes>
                         <Route path="/" element={<Home categories={categories} openProductModal={openProductModal} />} />
+                        <Route path="/admin" element={<Admin />} />
                     </Routes>
+                    <Footer />
                 </div>
                 <div className="fixed-cart" onClick={() => setShowCart(true)}>
-                    Ver carrito <span>${cart.reduce((sum, p) => sum + parseFloat(p.Precio) * p.cantidad, 0).toFixed(2)}</span>
+                    Ver carrito <span>${cart.reduce((sum, p) => sum + parseFloat(p.precio) * p.cantidad, 0).toFixed(2)}</span>
                 </div>
                 {currentProduct && !showCustomizeModal && (
                     <ProductModal
@@ -148,7 +131,6 @@ function App() {
                     isOpen={showConfirmation}
                     onClose={() => setShowConfirmation(false)}
                 />
-                <Footer />
             </div>
         </div>
     );
@@ -185,21 +167,21 @@ function Home({ categories, openProductModal }) {
                             <div className="accordion-body">
                                 {categories[categoria].map((producto) => (
                                     <div
-                                        key={producto.Nombre}
+                                        key={producto.nombre}
                                         className="producto d-flex align-items-center p-3 border rounded mb-3"
                                         onClick={() => openProductModal(producto)}
                                     >
                                         <img
-                                            src={producto.Imagen || 'https://via.placeholder.com/80'}
+                                            src={producto.imagen || 'https://via.placeholder.com/80'}
                                             className="img-fluid me-3 rounded"
                                             style={{ width: '80px' }}
-                                            alt={producto.Nombre}
+                                            alt={producto.nombre}
                                         />
                                         <div>
-                                            <h5>{producto.Nombre}</h5>
-                                            <p className="text-muted">{producto.Descripción}</p>
+                                            <h5>{producto.nombre}</h5>
+                                            <p className="text-muted">{producto.descripcion}</p>
                                         </div>
-                                        <strong className="ms-auto">${Math.round(parseFloat(producto.Precio || 0))}</strong>
+                                        <strong className="ms-auto">${Math.round(parseFloat(producto.precio || 0))}</strong>
                                     </div>
                                 ))}
                             </div>

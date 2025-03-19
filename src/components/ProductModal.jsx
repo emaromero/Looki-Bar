@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import * as bootstrap from 'bootstrap';
+import { cleanModalBackdrop } from './ModalUtils';
 
 function ProductModal({ currentProduct, onClose, onProceed }) {
     useEffect(() => {
@@ -8,10 +9,7 @@ function ProductModal({ currentProduct, onClose, onProceed }) {
             modal.show();
             return () => {
                 modal.hide();
-                document.body.classList.remove('modal-open');
-                document.body.style.overflow = '';
-                const backdrop = document.querySelector('.modal-backdrop');
-                if (backdrop) backdrop.remove();
+                cleanModalBackdrop();
             };
         }
     }, [currentProduct]);
@@ -23,7 +21,7 @@ function ProductModal({ currentProduct, onClose, onProceed }) {
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="popupLabel">{currentProduct.Nombre}</h5>
+                        <h5 className="modal-title" id="popupLabel">{currentProduct.nombre}</h5>
                         <button
                             type="button"
                             className="btn-close"
@@ -31,33 +29,27 @@ function ProductModal({ currentProduct, onClose, onProceed }) {
                                 onClose();
                                 const modal = bootstrap.Modal.getInstance(document.getElementById('popup'));
                                 modal.hide();
-                                document.body.classList.remove('modal-open');
-                                document.body.style.overflow = '';
-                                const backdrop = document.querySelector('.modal-backdrop');
-                                if (backdrop) backdrop.remove();
+                                cleanModalBackdrop();
                             }}
                             aria-label="Cerrar"
                         ></button>
                     </div>
                     <div className="modal-body text-center">
                         <img
-                            src={currentProduct.Imagen || 'https://via.placeholder.com/150'}
+                            src={currentProduct.imagen || 'https://via.placeholder.com/150'} // Cambiado de Imagen a imagen
                             className="img-fluid mb-3"
-                            alt={currentProduct.Nombre}
+                            alt={currentProduct.nombre}
                         />
-                        <p>{currentProduct.Descripción}</p>
+                        <p>{currentProduct.descripcion}</p>
                         <div className="price-button-container">
-                            <strong>${Math.round(parseFloat(currentProduct.Precio || 0))}</strong>
+                            <strong>${Math.round(parseFloat(currentProduct.precio || 0))}</strong>
                             <button
                                 className="btn btn-primary"
                                 onClick={() => {
                                     onProceed();
                                     const modal = bootstrap.Modal.getInstance(document.getElementById('popup'));
                                     modal.hide();
-                                    document.body.classList.remove('modal-open');
-                                    document.body.style.overflow = '';
-                                    const backdrop = document.querySelector('.modal-backdrop');
-                                    if (backdrop) backdrop.remove();
+                                    cleanModalBackdrop();
                                 }}
                             >
                                 Agregar
